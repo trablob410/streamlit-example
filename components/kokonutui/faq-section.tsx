@@ -4,7 +4,6 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { V31Button } from "../ui/v31-button"
 
 interface FAQItem {
   question: string
@@ -161,8 +160,8 @@ export default function FAQSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 neon-text">FREQUENTLY ASKED QUESTIONS</h2>
-          <p className="text-xl text-primary/80 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 neon-text">FREQUENTLY ASKED QUESTIONS</h2>
+          <p className="text-xl text-[#fcf0c1]/80 max-w-3xl mx-auto">
             GET ANSWERS TO COMMON QUESTIONS ABOUT FROM THE TRENCHES AND OUR SIGNAL SYSTEM
           </p>
         </motion.div>
@@ -175,8 +174,8 @@ export default function FAQSection() {
               onClick={() => setActiveCategory(category.id)}
               className={`px-4 py-2 text-sm md:text-base rounded-md transition-colors ${
                 activeCategory === category.id
-                  ? "bg-accent text-white"
-                  : "bg-black/40 text-primary/70 hover:text-primary border border-primary/20"
+                  ? "bg-red-600 text-white"
+                  : "bg-black/40 text-[#fcf0c1]/70 hover:text-[#fcf0c1] border border-[#fcf0c1]/20"
               }`}
               aria-pressed={activeCategory === category.id}
             >
@@ -201,8 +200,8 @@ export default function FAQSection() {
                 <button
                   onClick={() => toggleItem(itemId)}
                   className={`w-full text-left p-4 rounded-t-lg flex justify-between items-center transition-colors ${
-                    isOpen ? "bg-primary/10 text-primary" : "bg-secondary/40 text-primary/80 hover:bg-primary/5"
-                  } border border-primary/20`}
+                    isOpen ? "bg-[#fcf0c1]/10 text-[#fcf0c1]" : "bg-black/40 text-[#fcf0c1]/80 hover:bg-[#fcf0c1]/5"
+                  } border border-[#fcf0c1]/20`}
                   aria-expanded={isOpen}
                   aria-controls={`content-${itemId}`}
                 >
@@ -222,9 +221,9 @@ export default function FAQSection() {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="overflow-hidden border-x border-b border-primary/20 rounded-b-lg"
+                      className="overflow-hidden border-x border-b border-[#fcf0c1]/20 rounded-b-lg"
                     >
-                      <div className="p-4 bg-secondary/20 text-primary/90 text-sm leading-relaxed">
+                      <div className="p-4 bg-black/20 text-[#fcf0c1]/90 text-sm leading-relaxed">
                         {item.answer.split(". ").map((sentence, i) => (
                           <p key={i} className={i > 0 ? "mt-2" : ""}>
                             {sentence.trim() + (i < item.answer.split(". ").length - 1 ? "." : "")}
@@ -245,18 +244,17 @@ export default function FAQSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-primary-100/80 mb-6">
+          <p className="text-[#fcf0c1]/80 mb-6">
             STILL HAVE QUESTIONS? JOIN OUR TELEGRAM COMMUNITY FOR PERSONALIZED SUPPORT
           </p>
-          <V31Button
-            variant="primary"
-            as="a"
+          <a
             href="https://t.me/fttrenches_main"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-red-600 text-white font-bold rounded-md hover:bg-red-700 transition-colors"
           >
             JOIN OUR TELEGRAM
-          </V31Button>
+          </a>
         </motion.div>
       </div>
     </div>

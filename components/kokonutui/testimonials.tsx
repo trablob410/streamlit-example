@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
-import { V31Button } from "../ui/v31-button"
 
 interface Testimonial {
   id: number
@@ -115,8 +114,8 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 neon-text">TRADER TESTIMONIALS</h2>
-          <p className="text-xl text-primary/80 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 neon-text">TRADER TESTIMONIALS</h2>
+          <p className="text-xl text-[#fcf0c1]/80 max-w-3xl mx-auto">
             HEAR FROM THE COMMUNITY ABOUT THEIR EXPERIENCE WITH FROM THE TRENCHES
           </p>
         </motion.div>
@@ -140,7 +139,7 @@ export default function TestimonialsSection() {
             >
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-shrink-0 w-full md:w-auto flex justify-center">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
                     <Quote className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
                 </div>
@@ -151,20 +150,20 @@ export default function TestimonialsSection() {
                       <Star
                         key={i}
                         className={`w-4 h-4 ${
-                          i < testimonials[activeIndex].rating ? "text-warning fill-warning" : "text-gray-400"
+                          i < testimonials[activeIndex].rating ? "text-yellow-400 fill-yellow-400" : "text-gray-400"
                         }`}
                       />
                     ))}
                   </div>
 
-                  <blockquote className="text-primary/90 text-lg mb-6 italic">
+                  <blockquote className="text-[#fcf0c1]/90 text-lg mb-6 italic">
                     "{testimonials[activeIndex].text}"
                   </blockquote>
 
-                  <div className="border-t border-primary/10 pt-4 mt-4">
-                    <div className="font-bold text-primary">{testimonials[activeIndex].author}</div>
-                    <div className="text-primary/70 text-sm">{testimonials[activeIndex].role}</div>
-                    <div className="flex flex-wrap gap-4 mt-2 text-xs text-primary/60">
+                  <div className="border-t border-[#fcf0c1]/10 pt-4 mt-4">
+                    <div className="font-bold text-[#fcf0c1]">{testimonials[activeIndex].author}</div>
+                    <div className="text-[#fcf0c1]/70 text-sm">{testimonials[activeIndex].role}</div>
+                    <div className="flex flex-wrap gap-4 mt-2 text-xs text-[#fcf0c1]/60">
                       <span>TRADING EXPERIENCE: {testimonials[activeIndex].tradingExperience}</span>
                       {testimonials[activeIndex].returns && (
                         <span>REPORTED RETURNS: {testimonials[activeIndex].returns}</span>
@@ -180,7 +179,7 @@ export default function TestimonialsSection() {
           <div className="flex justify-center mt-8 gap-4">
             <button
               onClick={prevTestimonial}
-              className="p-2 rounded-full bg-secondary/40 border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-full bg-black/40 border border-[#fcf0c1]/30 text-[#fcf0c1] hover:bg-[#fcf0c1]/10 transition-colors"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -194,7 +193,7 @@ export default function TestimonialsSection() {
                     setActiveIndex(index)
                   }}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    index === activeIndex ? "bg-accent w-4" : "bg-primary/30 hover:bg-primary/50"
+                    index === activeIndex ? "bg-red-500 w-4" : "bg-[#fcf0c1]/30 hover:bg-[#fcf0c1]/50"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                   aria-current={index === activeIndex ? "true" : "false"}
@@ -203,7 +202,7 @@ export default function TestimonialsSection() {
             </div>
             <button
               onClick={nextTestimonial}
-              className="p-2 rounded-full bg-secondary/40 border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-full bg-black/40 border border-[#fcf0c1]/30 text-[#fcf0c1] hover:bg-[#fcf0c1]/10 transition-colors"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -216,18 +215,17 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12 text-center"
           >
-            <p className="text-primary-100/80 mb-6">
+            <p className="text-[#fcf0c1]/80 mb-6">
               JOIN OUR COMMUNITY TO SEE MORE SUCCESS STORIES AND START YOUR OWN TRADING JOURNEY
             </p>
-            <V31Button
-              variant="secondary"
-              as="a"
+            <a
               href="https://t.me/fttrenches_main"
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-transparent border border-[#fcf0c1] text-[#fcf0c1] font-bold rounded-md hover:bg-[#fcf0c1]/10 transition-colors"
             >
               JOIN OUR COMMUNITY
-            </V31Button>
+            </a>
           </motion.div>
         </div>
       </div>

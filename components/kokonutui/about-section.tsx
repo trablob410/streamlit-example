@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Twitter, MessageCircle, ExternalLink } from "lucide-react"
 import Image from "next/image"
-import { V31Button } from "../ui/v31-button"
 
 interface TeamMember {
   name: string
@@ -45,9 +44,9 @@ export default function AboutSection() {
   ]
 
   return (
-    <div id="about" ref={ref} className="py-20 relative overflow-hidden bg-secondary">
+    <div id="about" ref={ref} className="py-20 relative overflow-hidden bg-black">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 to-secondary/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40" />
         <div className="scanline"></div>
       </div>
 
@@ -58,8 +57,8 @@ export default function AboutSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 neon-text">ABOUT US</h2>
-          <p className="text-xl text-primary/80 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 neon-text">ABOUT US</h2>
+          <p className="text-xl text-[#fcf0c1]/80 max-w-3xl mx-auto">
             FROM THE TRENCHES WAS CREATED BY TRADERS, FOR TRADERS. WE'VE BEEN IN THE CRYPTO TRENCHES AND BUILT THE TOOLS
             WE WISHED WE HAD.
           </p>
@@ -76,19 +75,19 @@ export default function AboutSection() {
               <div className="cyber-card rounded-lg overflow-hidden h-full">
                 <div className="relative h-48 w-full">
                   <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-xl font-bold text-primary">{member.name}</h3>
-                    <p className="text-sm text-accent">{member.role}</p>
+                    <h3 className="text-xl font-bold text-[#fcf0c1]">{member.name}</h3>
+                    <p className="text-sm text-red-400">{member.role}</p>
                   </div>
                 </div>
                 <div className="p-4">
-                  <p className="text-primary/80 text-sm mb-4 leading-relaxed">{member.bio}</p>
+                  <p className="text-[#fcf0c1]/80 text-sm mb-4 leading-relaxed">{member.bio}</p>
                   <a
                     href={member.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-primary/70 hover:text-primary transition-colors text-sm"
+                    className="inline-flex items-center gap-2 text-[#fcf0c1]/70 hover:text-[#fcf0c1] transition-colors text-sm"
                   >
                     <Twitter className="h-4 w-4" />
                     FOLLOW ON X
@@ -104,7 +103,7 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-secondary/40 backdrop-blur-sm border border-primary/20 rounded-lg p-8"
+          className="bg-black/40 backdrop-blur-sm border border-[#fcf0c1]/20 rounded-lg p-8"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
@@ -114,18 +113,16 @@ export default function AboutSection() {
                 OUR MISSION IS TO LEVEL THE PLAYING FIELD BY PROVIDING CUTTING-EDGE TOOLS THAT TRACK SMART MONEY
                 MOVEMENTS AND TRANSLATE THEM INTO ACTIONABLE SIGNALS.
               </p>
-              <V31Button
-                variant="ghost"
-                size="sm"
-                as="a"
+              <a
                 href="https://t.me/fttrenches_main"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#fcf0c1] hover:text-white transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
                 JOIN OUR COMMUNITY
                 <ExternalLink className="h-4 w-4" />
-              </V31Button>
+              </a>
             </div>
             <div className="bg-black/60 p-6 rounded-lg border border-[#fcf0c1]/10">
               <h4 className="text-lg font-bold text-[#fcf0c1] mb-4">KEY ACHIEVEMENTS</h4>

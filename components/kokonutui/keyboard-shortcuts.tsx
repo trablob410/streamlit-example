@@ -10,15 +10,15 @@ interface ShortcutProps {
 }
 
 const Shortcut = ({ keys, description }: ShortcutProps) => (
-  <div className="flex items-center justify-between py-2 border-b border-primary/10 last:border-b-0">
-    <span className="text-primary/80 text-sm">{description}</span>
+  <div className="flex items-center justify-between py-2 border-b border-[#fcf0c1]/10 last:border-b-0">
+    <span className="text-[#fcf0c1]/80 text-sm">{description}</span>
     <div className="flex items-center gap-2">
       {keys.map((key, index) => (
         <div key={index} className="flex items-center">
-          <kbd className="px-2 py-1 bg-black/60 border border-primary/30 rounded text-xs text-primary min-w-[24px] text-center">
+          <kbd className="px-2 py-1 bg-black/60 border border-[#fcf0c1]/30 rounded text-xs text-[#fcf0c1] min-w-[24px] text-center">
             {key}
           </kbd>
-          {index < keys.length - 1 && <span className="mx-1 text-primary/50">+</span>}
+          {index < keys.length - 1 && <span className="mx-1 text-[#fcf0c1]/50">+</span>}
         </div>
       ))}
     </div>
@@ -99,7 +99,7 @@ export default function KeyboardShortcuts() {
       {/* Keyboard shortcut button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 z-50 p-2 rounded-full bg-black/80 border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+        className="fixed bottom-4 right-4 z-50 p-2 rounded-full bg-black/80 border border-[#fcf0c1]/30 text-[#fcf0c1] hover:bg-[#fcf0c1]/10 transition-colors"
         aria-label="Show keyboard shortcuts"
       >
         <Keyboard className="w-5 h-5" />
@@ -127,14 +127,14 @@ export default function KeyboardShortcuts() {
               className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50"
             >
               <div className="cyber-card rounded-lg overflow-hidden">
-                <div className="flex items-center justify-between p-4 border-b border-primary/20">
-                  <h3 className="text-lg font-bold text-primary">KEYBOARD SHORTCUTS</h3>
+                <div className="flex items-center justify-between p-4 border-b border-[#fcf0c1]/20">
+                  <h3 className="text-lg font-bold text-[#fcf0c1]">KEYBOARD SHORTCUTS</h3>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="p-1 rounded-full hover:bg-primary/10 transition-colors"
+                    className="p-1 rounded-full hover:bg-[#fcf0c1]/10 transition-colors"
                     aria-label="Close shortcuts panel"
                   >
-                    <X className="w-5 h-5 text-primary" />
+                    <X className="w-5 h-5 text-[#fcf0c1]" />
                   </button>
                 </div>
                 <div className="p-4 max-h-[60vh] overflow-y-auto">
@@ -144,9 +144,9 @@ export default function KeyboardShortcuts() {
                     ))}
                   </div>
                 </div>
-                <div className="p-4 border-t border-primary/20 bg-primary/5">
-                  <p className="text-xs text-primary/70 text-center">
-                    PRESS <kbd className="px-1 bg-secondary/40 border border-primary/30 rounded">?</kbd> ANYTIME TO SHOW
+                <div className="p-4 border-t border-[#fcf0c1]/20 bg-[#fcf0c1]/5">
+                  <p className="text-xs text-[#fcf0c1]/70 text-center">
+                    PRESS <kbd className="px-1 bg-black/40 border border-[#fcf0c1]/30 rounded">?</kbd> ANYTIME TO SHOW
                     THIS PANEL
                   </p>
                 </div>

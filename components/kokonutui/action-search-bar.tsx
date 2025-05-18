@@ -18,8 +18,6 @@ import AboutSection from "./about-section"
 import FAQSection from "./faq-section"
 import TestimonialsSection from "./testimonials"
 import KeyboardShortcuts from "./keyboard-shortcuts"
-import FTTLogo from "./ftt-logo"
-import { V31ThemeToggle } from "@/components/ui/v31-theme-toggle"
 
 interface Action {
   id: string
@@ -138,7 +136,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
 
   const handleActionClick = (action: Action) => {
     setSelectedAction(action)
-    window.open(action.url, "_blank", "noopener,noreferrer")
+    window.open(action.url, "_blank")
   }
 
   const handleLogoClick = () => {
@@ -203,9 +201,13 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col relative overflow-hidden bg-background">
+    <div className="w-full min-h-screen flex flex-col relative overflow-hidden bg-black">
       {/* Skip to content link for accessibility */}
-      <a href="#main-content" onClick={skipToContent} className="skip-to-content">
+      <a
+        href="#main-content"
+        onClick={skipToContent}
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:rounded-md"
+      >
         Skip to main content
       </a>
 
@@ -237,14 +239,12 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
       </main>
 
       {/* Footer section */}
-      <footer className="w-full py-8 bg-black/80 backdrop-blur-md border-t border-primary-100/20 mt-12 z-10 relative">
+      <footer className="w-full py-8 bg-black/80 backdrop-blur-md border-t border-[#fcf0c1]/20 mt-12 z-10 relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="mb-4">
-                <FTTLogo size="md" variant="full" />
-              </div>
-              <p className="text-primary-100/70 text-sm leading-relaxed mb-4 font-sans">
+              <h3 className="text-[#fcf0c1] font-bold mb-4 text-lg">FROM THE TRENCHES</h3>
+              <p className="text-[#fcf0c1]/70 text-sm leading-relaxed mb-4">
                 AI-POWERED CRYPTO INTELLIGENCE PLATFORM THAT TRACKS SMART MONEY MOVEMENTS AND DELIVERS ACTIONABLE
                 TRADING SIGNALS.
               </p>
@@ -253,7 +253,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                   href="https://t.me/fttrenches_main"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-100/70 hover:text-primary-100"
+                  className="text-[#fcf0c1]/70 hover:text-[#fcf0c1]"
                   aria-label="Join our Telegram channel"
                 >
                   <MessageCircle className="h-5 w-5" />
@@ -262,22 +262,21 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                   href="https://x.com/fttrenches_"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-100/70 hover:text-primary-100"
+                  className="text-[#fcf0c1]/70 hover:text-[#fcf0c1]"
                   aria-label="Follow us on X (Twitter)"
                 >
                   <Twitter className="h-5 w-5" />
                 </a>
-                <V31ThemeToggle className="ml-2" />
               </div>
             </div>
 
             <div>
-              <h3 className="text-primary font-bold mb-4 text-lg">QUICK LINKS</h3>
+              <h3 className="text-[#fcf0c1] font-bold mb-4 text-lg">QUICK LINKS</h3>
               <ul className="space-y-2">
                 <li>
                   <button
                     onClick={() => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-primary/70 hover:text-primary text-sm"
+                    className="text-[#fcf0c1]/70 hover:text-[#fcf0c1] text-sm"
                   >
                     HOME
                   </button>
@@ -285,7 +284,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                 <li>
                   <button
                     onClick={() => document.getElementById("signal-types")?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-primary/70 hover:text-primary text-sm"
+                    className="text-[#fcf0c1]/70 hover:text-[#fcf0c1] text-sm"
                   >
                     SIGNAL TYPES
                   </button>
@@ -293,7 +292,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                 <li>
                   <button
                     onClick={() => document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-primary/70 hover:text-primary text-sm"
+                    className="text-[#fcf0c1]/70 hover:text-[#fcf0c1] text-sm"
                   >
                     TESTIMONIALS
                   </button>
@@ -301,7 +300,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                 <li>
                   <button
                     onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-primary/70 hover:text-primary text-sm"
+                    className="text-[#fcf0c1]/70 hover:text-[#fcf0c1] text-sm"
                   >
                     PRICING
                   </button>
@@ -309,7 +308,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                 <li>
                   <button
                     onClick={() => document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-primary/70 hover:text-primary text-sm"
+                    className="text-[#fcf0c1]/70 hover:text-[#fcf0c1] text-sm"
                   >
                     FAQ
                   </button>
@@ -317,7 +316,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                 <li>
                   <button
                     onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-primary/70 hover:text-primary text-sm"
+                    className="text-[#fcf0c1]/70 hover:text-[#fcf0c1] text-sm"
                   >
                     ABOUT
                   </button>
@@ -326,7 +325,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
             </div>
 
             <div>
-              <h3 className="text-primary font-bold mb-4 text-lg">SEARCH COMMANDS</h3>
+              <h3 className="text-[#fcf0c1] font-bold mb-4 text-lg">SEARCH COMMANDS</h3>
               <div className="relative">
                 <Input
                   id="search-input"
@@ -336,19 +335,19 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                   onChange={handleInputChange}
                   onFocus={handleFocus}
                   onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-                  className="pl-4 pr-10 py-2 h-10 text-sm rounded-lg focus-visible:ring-offset-0 bg-black/70 border-primary/30 text-primary placeholder:text-primary/50"
+                  className="pl-4 pr-10 py-2 h-10 text-sm rounded-lg focus-visible:ring-offset-0 bg-black/70 border-yellow-900/50 text-[#fcf0c1] placeholder:text-[#fcf0c1]/50"
                   aria-label="Search resources"
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4">
-                  <Search className="w-4 h-4 text-primary/70" aria-hidden="true" />
+                  <Search className="w-4 h-4 text-[#fcf0c1]/70" aria-hidden="true" />
                 </div>
               </div>
 
               <div className="w-full relative mt-2">
                 <AnimatePresence>
-                  {isFocused && result && (
+                  {isFocused && result && !selectedAction && (
                     <motion.div
-                      className="w-full border rounded-md shadow-lg overflow-hidden border-primary/30 bg-black/80 backdrop-blur-sm"
+                      className="w-full border rounded-md shadow-lg overflow-hidden border-[#fcf0c1]/30 bg-black/80 backdrop-blur-sm"
                       variants={container}
                       initial="hidden"
                       animate="show"
@@ -360,7 +359,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                         {result.actions.map((action) => (
                           <motion.li
                             key={action.id}
-                            className="px-3 py-2 flex items-center justify-between hover:bg-primary/10 cursor-pointer rounded-md"
+                            className="px-3 py-2 flex items-center justify-between hover:bg-[#fcf0c1]/10 cursor-pointer rounded-md"
                             variants={item}
                             layout
                             onClick={() => handleActionClick(action)}
@@ -369,12 +368,12 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                           >
                             <div className="flex items-center gap-2 justify-between">
                               <div className="flex items-center gap-2">
-                                <span className="text-primary bg-black/50 p-1 rounded-full">{action.icon}</span>
-                                <span className="text-xs font-medium text-primary">{action.label}</span>
+                                <span className="text-[#fcf0c1] bg-black/50 p-1 rounded-full">{action.icon}</span>
+                                <span className="text-xs font-medium text-[#fcf0c1]">{action.label}</span>
                               </div>
                             </div>
                             <div className="flex items-center gap-2">
-                              <span className="text-xs text-primary/50">{action.end}</span>
+                              <span className="text-xs text-[#fcf0c1]/50">{action.end}</span>
                             </div>
                           </motion.li>
                         ))}
@@ -386,11 +385,11 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
             </div>
           </div>
 
-          <div className="border-t border-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center">
-            <div className="text-primary/60 text-sm mb-4 md:mb-0 font-sans">
+          <div className="border-t border-[#fcf0c1]/20 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-[#fcf0c1]/60 text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} FROM THE TRENCHES. ALL RIGHTS RESERVED.
             </div>
-            <div className="text-primary/60 text-xs">BUILT BY DEGENS, BUILT FOR DEGENS</div>
+            <div className="text-[#fcf0c1]/60 text-xs">BUILT BY DEGENS, BUILT FOR DEGENS</div>
           </div>
         </div>
       </footer>

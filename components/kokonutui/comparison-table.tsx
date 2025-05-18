@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { Star, Check, X, HelpCircle } from "lucide-react"
 import { useInView } from "react-intersection-observer"
 import { useState } from "react"
-import { V31Button } from "../ui/v31-button"
 
 interface FeatureComparisonProps {
   feature: string
@@ -70,7 +69,7 @@ const FeatureComparison = ({ feature, benefit, free, paid }: FeatureComparisonPr
             <X className="h-5 w-5 text-red-500" />
           )}
         </div>
-        <span className="text-xs uppercase text-[#efd6ac] font-medium">{paid.description}</span>
+        <span className="text-xs uppercase text-white font-medium">{paid.description}</span>
       </div>
     </div>
   )
@@ -226,23 +225,23 @@ export default function ComparisonTable() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 neon-text">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 neon-text">
             FROM THE TRENCHES: INTELLIGENCE UPGRADE
           </h2>
-          <p className="text-xl text-primary/80 max-w-3xl mx-auto">
+          <p className="text-xl text-[#fcf0c1]/80 max-w-3xl mx-auto">
             CHOOSE YOUR ARSENAL FOR THE CRYPTO BATTLEFIELD AND GAIN THE EDGE YOU NEED TO SUCCEED
           </p>
         </div>
 
-        <div className="bg-black/80 backdrop-blur-md border border-primary/30 rounded-lg overflow-hidden shadow-2xl">
+        <div className="bg-black/80 backdrop-blur-md border border-[#fcf0c1]/30 rounded-lg overflow-hidden shadow-2xl">
           {/* Table header */}
-          <div className="grid grid-cols-3 gap-4 p-6 border-b border-primary/20">
-            <div className="text-primary font-bold text-lg text-center uppercase">FEATURE</div>
-            <div className="text-center px-2 py-3 rounded-md bg-black/60 border border-primary/10">
-              <div className="text-primary/80 font-bold text-lg mb-1 uppercase">RECON TIER</div>
-              <div className="text-primary/60 text-sm">FREE</div>
+          <div className="grid grid-cols-3 gap-4 p-6 border-b border-[#fcf0c1]/20">
+            <div className="text-[#fcf0c1] font-bold text-lg text-center uppercase">FEATURE</div>
+            <div className="text-center px-2 py-3 rounded-md bg-black/60 border border-[#fcf0c1]/10">
+              <div className="text-[#fcf0c1]/80 font-bold text-lg mb-1 uppercase">RECON TIER</div>
+              <div className="text-[#fcf0c1]/60 text-sm">FREE</div>
             </div>
-            <div className="text-center px-2 py-3 rounded-md hologram-bg border border-primary/30">
+            <div className="text-center px-2 py-3 rounded-md hologram-bg border border-[#fcf0c1]/30">
               <div className="text-white font-bold text-lg mb-1 glow-effect uppercase">COMMANDER TIER</div>
               <div className="text-white/90 text-sm">1 SOL/MONTH</div>
             </div>
@@ -255,36 +254,40 @@ export default function ComparisonTable() {
             ))}
           </div>
 
-          {/* Update the CTA button */}
-          <div className="text-center p-6">
-            <V31Button
-              variant="primary"
-              as="a"
-              href="https://t.me/fttrenches_main"
-              target="_blank"
-              rel="noopener noreferrer"
-              glow="subtle"
-            >
-              UPGRADE TO COMMANDER TIER
-              <span className="text-xs opacity-70">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="inline-block ml-1"
-                >
-                  <path
-                    d="M7 17L17 7M17 7H7M17 7V17"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </V31Button>
+          {/* CTA with Telegram link */}
+          <div className="p-6 bg-[#fcf0c1]/10 border-t border-[#fcf0c1]/20">
+            <div className="text-center">
+              <p className="text-[#fcf0c1] mb-4 max-w-3xl mx-auto">
+                FTT IS EVOLVING FROM A FREE SERVICE TO A PREMIUM INTELLIGENCE SUITE - EARLY SUPPORTERS GET SPECIAL
+                PRICING AND BENEFITS. UPGRADE NOW TO GAIN THE COMPETITIVE EDGE IN YOUR TRADING.
+              </p>
+              <a
+                href="https://t.me/fttrenches_main"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-red-600 border border-red-700 text-white font-bold rounded-md hover:bg-red-700 transition-colors uppercase"
+              >
+                UPGRADE TO COMMANDER TIER
+                <span className="text-xs opacity-70">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="inline-block ml-1"
+                  >
+                    <path
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </motion.div>
