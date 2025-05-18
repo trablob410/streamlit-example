@@ -5,13 +5,21 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Send, Twitter, MessageCircle, FileText, Bot } from "lucide-react"
+import { Search, Twitter, MessageCircle, FileText, Bot } from "lucide-react"
 import useDebounce from "@/hooks/use-debounce"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import ComparisonTable from "./comparison-table"
 import SignalTypes from "./signal-types"
 import Navigation from "./navigation"
+import HeroSection from "./hero-section"
+import HowItWorks from "./how-it-works"
+import AboutSection from "./about-section"
+import FAQSection from "./faq-section"
+import TestimonialsSection from "./testimonials"
+import KeyboardShortcuts from "./keyboard-shortcuts"
+import FTTLogo from "./ftt-logo"
+import { V31ThemeToggle } from "@/components/ui/v31-theme-toggle"
 
 interface Action {
   id: string
@@ -130,7 +138,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
 
   const handleActionClick = (action: Action) => {
     setSelectedAction(action)
-    window.open(action.url, "_blank")
+    window.open(action.url, "_blank", "noopener,noreferrer")
   }
 
   const handleLogoClick = () => {
@@ -188,215 +196,207 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
     setIsFocused(true)
   }
 
+  // Skip to main content link for accessibility
+  const skipToContent = () => {
+    document.getElementById("main-content")?.focus()
+    document.getElementById("main-content")?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
-    <div className="w-full min-h-screen flex flex-col relative overflow-hidden bg-black">
+    <div className="w-full min-h-screen flex flex-col relative overflow-hidden bg-background">
+      {/* Skip to content link for accessibility */}
+      <a href="#main-content" onClick={skipToContent} className="skip-to-content">
+        Skip to main content
+      </a>
+
       {/* Navigation */}
       <Navigation />
 
-      {/* Animated GIF background with reduced blur */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <div className="relative w-full h-full">
-            {/* GIF Background */}
-            <div className="absolute inset-0 w-full h-full">
-              <Image
-                src="/videos/controller-animation.gif"
-                alt="CONTROLLER ANIMATION"
-                fill
-                className="object-cover"
-                style={{
-                  filter: "blur(2.5px) brightness(0.45)", // Reduced blur from 4px to 2.5px
-                  transform: "scale(1.05)", // Slightly scale up to avoid blur edges
-                }}
-                priority
-              />
+      {/* Main content */}
+      <main id="main-content" tabIndex={-1}>
+        {/* Hero Section */}
+        <HeroSection />
+
+        {/* How It Works Section */}
+        <HowItWorks />
+
+        {/* Signal Types section */}
+        <SignalTypes />
+
+        {/* Testimonials section */}
+        <TestimonialsSection />
+
+        {/* Comparison table section */}
+        <ComparisonTable />
+
+        {/* FAQ Section */}
+        <FAQSection />
+
+        {/* About Section */}
+        <AboutSection />
+      </main>
+
+      {/* Footer section */}
+      <footer className="w-full py-8 bg-black/80 backdrop-blur-md border-t border-primary-100/20 mt-12 z-10 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="mb-4">
+                <FTTLogo size="md" variant="full" />
+              </div>
+              <p className="text-primary-100/70 text-sm leading-relaxed mb-4 font-sans">
+                AI-POWERED CRYPTO INTELLIGENCE PLATFORM THAT TRACKS SMART MONEY MOVEMENTS AND DELIVERS ACTIONABLE
+                TRADING SIGNALS.
+              </p>
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://t.me/fttrenches_main"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-100/70 hover:text-primary-100"
+                  aria-label="Join our Telegram channel"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://x.com/fttrenches_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-100/70 hover:text-primary-100"
+                  aria-label="Follow us on X (Twitter)"
+                >
+                  <Twitter className="h-5 w-5" />
+                </a>
+                <V31ThemeToggle className="ml-2" />
+              </div>
             </div>
 
-            {/* Additional overlay for better content visibility */}
-            <div className="absolute inset-0 bg-black/45" />
+            <div>
+              <h3 className="text-primary font-bold mb-4 text-lg">QUICK LINKS</h3>
+              <ul className="space-y-2">
+                <li>
+                  <button
+                    onClick={() => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" })}
+                    className="text-primary/70 hover:text-primary text-sm"
+                  >
+                    HOME
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById("signal-types")?.scrollIntoView({ behavior: "smooth" })}
+                    className="text-primary/70 hover:text-primary text-sm"
+                  >
+                    SIGNAL TYPES
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" })}
+                    className="text-primary/70 hover:text-primary text-sm"
+                  >
+                    TESTIMONIALS
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+                    className="text-primary/70 hover:text-primary text-sm"
+                  >
+                    PRICING
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" })}
+                    className="text-primary/70 hover:text-primary text-sm"
+                  >
+                    FAQ
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+                    className="text-primary/70 hover:text-primary text-sm"
+                  >
+                    ABOUT
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-            {/* Subtle vignette effect */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%)",
-                mixBlendMode: "multiply",
-              }}
-            />
-
-            {/* Gold accent overlay */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "radial-gradient(circle at 70% 70%, rgba(252, 211, 77, 0.05) 0%, rgba(0, 0, 0, 0) 60%)",
-                mixBlendMode: "screen",
-              }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Main content */}
-      <div id="home" className="flex items-center justify-center min-h-screen w-full pt-16">
-        <div className="w-full max-w-2xl mx-auto z-10 px-4 relative mt-12 sm:mt-8 md:mt-0">
-          <div className="relative flex flex-col justify-start items-center min-h-[300px]">
-            <div className="w-full max-w-md sticky top-0 bg-transparent z-10 pt-4 pb-1">
-              <label className="text-sm font-medium text-[#fcf0c1] mb-2 block" htmlFor="search">
-                SEARCH COMMANDS
-              </label>
+            <div>
+              <h3 className="text-primary font-bold mb-4 text-lg">SEARCH COMMANDS</h3>
               <div className="relative">
                 <Input
+                  id="search-input"
                   type="text"
-                  placeholder="SEARCH EVERYTHING YOU NEED HERE..."
+                  placeholder="FIND RESOURCES..."
                   value={query}
                   onChange={handleInputChange}
                   onFocus={handleFocus}
                   onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-                  className="pl-4 pr-10 py-2.5 h-12 text-base rounded-lg focus-visible:ring-offset-0 bg-black/70 border-yellow-900/50 text-[#fcf0c1] placeholder:text-[#fcf0c1]/50"
+                  className="pl-4 pr-10 py-2 h-10 text-sm rounded-lg focus-visible:ring-offset-0 bg-black/70 border-primary/30 text-primary placeholder:text-primary/50"
+                  aria-label="Search resources"
                 />
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5">
-                  <AnimatePresence mode="popLayout">
-                    {query.length > 0 ? (
-                      <motion.div
-                        key="send"
-                        initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: 20, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Send className="w-5 h-5 text-[#fcf0c1]" />
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="search"
-                        initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: 20, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Search className="w-5 h-5 text-[#fcf0c1]" />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4">
+                  <Search className="w-4 h-4 text-primary/70" aria-hidden="true" />
                 </div>
               </div>
-            </div>
 
-            <div className="w-full max-w-md relative">
-              <AnimatePresence>
-                {isFocused && result && !selectedAction && (
-                  <motion.div
-                    className="w-full border rounded-md shadow-lg overflow-hidden border-[#fcf0c1]/30 bg-black/80 backdrop-blur-sm mt-1"
-                    variants={container}
-                    initial="hidden"
-                    animate="show"
-                    exit="exit"
-                  >
-                    <motion.ul>
-                      {result.actions.map((action) => (
-                        <motion.li
-                          key={action.id}
-                          className="px-3 py-2 flex items-center justify-between hover:bg-[#fcf0c1]/10 cursor-pointer rounded-md"
-                          variants={item}
-                          layout
-                          onClick={() => handleActionClick(action)}
-                        >
-                          <div className="flex items-center gap-2 justify-between">
-                            <div className="flex items-center gap-2">
-                              <span className="text-[#fcf0c1] bg-black/50 p-1 rounded-full">{action.icon}</span>
-                              <span className="text-sm font-medium text-[#fcf0c1]">{action.label}</span>
-                              <span className="text-xs text-[#fcf0c1]/70">{action.description}</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-[#fcf0c1]/50">{action.short}</span>
-                            <span className="text-xs text-[#fcf0c1]/50 text-right">{action.end}</span>
-                          </div>
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                    <div className="mt-2 px-3 py-2 border-t border-[#fcf0c1]/20">
-                      <div className="text-xs text-[#fcf0c1]/70 mb-2">FOLLOW FOR MORE:</div>
-                      <div className="flex flex-col gap-1.5 mb-3">
-                        {teamMembers.map((member, index) => (
-                          <a
-                            key={index}
-                            href={member.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-xs text-[#fcf0c1]/70 hover:text-[#fcf0c1] transition-colors"
+              <div className="w-full relative mt-2">
+                <AnimatePresence>
+                  {isFocused && result && (
+                    <motion.div
+                      className="w-full border rounded-md shadow-lg overflow-hidden border-primary/30 bg-black/80 backdrop-blur-sm"
+                      variants={container}
+                      initial="hidden"
+                      animate="show"
+                      exit="exit"
+                      role="listbox"
+                      aria-label="Search results"
+                    >
+                      <motion.ul>
+                        {result.actions.map((action) => (
+                          <motion.li
+                            key={action.id}
+                            className="px-3 py-2 flex items-center justify-between hover:bg-primary/10 cursor-pointer rounded-md"
+                            variants={item}
+                            layout
+                            onClick={() => handleActionClick(action)}
+                            role="option"
+                            aria-selected={selectedAction?.id === action.id}
                           >
-                            <Twitter className="h-3 w-3" />
-                            <span>{member.name}</span>
-                          </a>
+                            <div className="flex items-center gap-2 justify-between">
+                              <div className="flex items-center gap-2">
+                                <span className="text-primary bg-black/50 p-1 rounded-full">{action.icon}</span>
+                                <span className="text-xs font-medium text-primary">{action.label}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-primary/50">{action.end}</span>
+                            </div>
+                          </motion.li>
                         ))}
-                      </div>
-
-                      <div className="flex items-center justify-between text-xs text-[#fcf0c1]/50 pt-2 border-t border-[#fcf0c1]/20">
-                        <span>PRESS ⌘K TO OPEN COMMANDS</span>
-                        <span>ESC TO CANCEL</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div className="mt-8 text-center text-[#fcf0c1] text-sm font-mono z-20 relative neon-text">
-              BUILT BY DEGENS, BUILT FOR DEGENS
+                      </motion.ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Signal Types section - Added before Comparison Table */}
-      <SignalTypes />
-
-      {/* Comparison table section */}
-      <div id="pricing">
-        <ComparisonTable />
-      </div>
-
-      {/* Footer section */}
-      <footer className="w-full py-8 bg-black/80 backdrop-blur-md border-t border-[#fcf0c1]/20 mt-12 z-10 relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center">
-              <Image
-                src="/images/ftt-logo.png"
-                alt="FROM THE TRENCHES"
-                width={100}
-                height={40}
-                className="h-8 w-auto"
-              />
+          <div className="border-t border-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-primary/60 text-sm mb-4 md:mb-0 font-sans">
+              © {new Date().getFullYear()} FROM THE TRENCHES. ALL RIGHTS RESERVED.
             </div>
-
-            <div className="flex items-center gap-6">
-              <a
-                href="https://t.me/fttrenches_main"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#fcf0c1]/80 hover:text-[#fcf0c1] transition-colors"
-              >
-                <MessageCircle className="h-5 w-5" />
-                <span className="text-sm">TELEGRAM</span>
-              </a>
-
-              <a
-                href="https://x.com/fttrenches_"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#fcf0c1]/80 hover:text-[#fcf0c1] transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-                <span className="text-sm">X (TWITTER)</span>
-              </a>
-            </div>
-
-            <div className="text-[#fcf0c1]/60 text-sm">© {new Date().getFullYear()} FROM THE TRENCHES</div>
+            <div className="text-primary/60 text-xs">BUILT BY DEGENS, BUILT FOR DEGENS</div>
           </div>
         </div>
       </footer>
+
+      {/* Keyboard shortcuts component */}
+      <KeyboardShortcuts />
     </div>
   )
 }

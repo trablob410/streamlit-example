@@ -2,11 +2,12 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Rocket, TrendingUp, Twitter, BarChart3, AlertTriangle, Clock, Target, Award } from "lucide-react"
+import { Rocket, TrendingUp, Twitter, BarChart3, AlertTriangle, Clock, Target, Award, Info } from "lucide-react"
 import { useInView } from "react-intersection-observer"
 import Image from "next/image"
+import { V31Button } from "../ui/v31-button"
 
 type SignalType = {
   id: string
@@ -27,6 +28,7 @@ type SignalType = {
     label: string
     value: string
   }[]
+  benefits: string[]
 }
 
 export default function SignalTypes() {
@@ -36,6 +38,7 @@ export default function SignalTypes() {
     threshold: 0.1,
   })
   const [isHovered, setIsHovered] = useState(false)
+  const [showTooltip, setShowTooltip] = useState<string | null>(null)
 
   const signalTypes: SignalType[] = [
     {
@@ -70,6 +73,11 @@ export default function SignalTypes() {
           value: "5-10X",
         },
       ],
+      benefits: [
+        "POTENTIAL FOR EXPLOSIVE RETURNS IN SHORT TIMEFRAMES",
+        "EARLY ACCESS TO PROMISING PROJECTS BEFORE WIDER MARKET AWARENESS",
+        "LEVERAGES INSIDER KNOWLEDGE FROM SMART MONEY WALLETS",
+      ],
     },
     {
       id: "mid-sized",
@@ -102,6 +110,11 @@ export default function SignalTypes() {
           label: "PROFIT TARGET",
           value: "2-5X",
         },
+      ],
+      benefits: [
+        "HIGHER WIN RATE THAN NEW LAUNCH SIGNALS",
+        "MORE TIME TO ANALYZE AND EXECUTE TRADES",
+        "FOLLOWS ESTABLISHED ACCUMULATION PATTERNS FROM SMART MONEY",
       ],
     },
     {
@@ -136,6 +149,11 @@ export default function SignalTypes() {
           value: "HIGH",
         },
       ],
+      benefits: [
+        "CAPTURES MARKET-MOVING SOCIAL SENTIMENT EARLY",
+        "IDENTIFIES PROJECTS WITH STRONG NARRATIVE POTENTIAL",
+        "COMBINES SOCIAL SIGNALS WITH SMART MONEY VALIDATION",
+      ],
     },
     {
       id: "volume-spike",
@@ -169,18 +187,23 @@ export default function SignalTypes() {
           value: "2-3X",
         },
       ],
+      benefits: [
+        "CAPTURES SUDDEN MARKET MOVEMENTS FOR QUICK PROFITS",
+        "VALIDATES VOLUME SPIKES WITH SMART MONEY PARTICIPATION",
+        "IDEAL FOR ACTIVE TRADERS WHO CAN EXECUTE QUICKLY",
+      ],
     },
   ]
 
   const activeSignal = signalTypes.find((signal) => signal.id === activeTab) || signalTypes[0]
 
-  // Scanline effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsHovered((prev) => !prev)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
+  // Glossary tooltips
+  const glossary = {
+    smartMoney:
+      "WALLETS BELONGING TO SUCCESSFUL TRADERS, INSTITUTIONS, OR INSIDERS WITH A TRACK RECORD OF PROFITABLE TRADES.",
+    kol: "KEY OPINION LEADERS - INFLUENTIAL FIGURES IN THE CRYPTO SPACE WHOSE ACTIONS AND OPINIONS CAN MOVE MARKETS.",
+    winRate: "THE PERCENTAGE OF SIGNALS THAT RESULT IN PROFITABLE TRADES BASED ON HISTORICAL PERFORMANCE.",
+  }
 
   return (
     <div id="signal-types" ref={ref} className="w-full py-20 relative overflow-hidden">
@@ -199,14 +222,14 @@ export default function SignalTypes() {
       >
         <div className="text-center mb-12">
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 relative inline-block glitch-text neon-text"
+            className="text-3xl md:text-4xl font-bold text-primary mb-4 relative inline-block neon-text"
             data-text="SIGNAL TYPES FOR EVERY STRATEGY"
           >
             SIGNAL TYPES FOR EVERY STRATEGY
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-red-500 mt-2"></div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent mt-2"></div>
           </h2>
-          <p className="text-xl text-[#fcf0c1]/80 mt-6">
-            WE'VE DEVELOPED MULTIPLE SIGNAL TYPES TO MATCH DIFFERENT RISK PROFILES
+          <p className="text-xl text-primary/80 mt-6 max-w-3xl mx-auto">
+            WE'VE DEVELOPED MULTIPLE SIGNAL TYPES TO MATCH DIFFERENT RISK PROFILES AND TRADING STRATEGIES
           </p>
         </div>
 
@@ -215,7 +238,7 @@ export default function SignalTypes() {
           {signalTypes.map((signal) => (
             <button
               key={signal.id}
-              className={`px-4 py-2 text-[#fcf0c1] font-medium text-sm md:text-base relative transition-all duration-300 ${
+              className={`px-4 py-2 text-primary font-medium text-sm md:text-base relative transition-all duration-300 ${
                 activeTab === signal.id ? "opacity-100" : "opacity-70 hover:opacity-90"
               }`}
               onClick={() => setActiveTab(signal.id)}
@@ -223,7 +246,7 @@ export default function SignalTypes() {
               {signal.name}
               {activeTab === signal.id && (
                 <motion.div
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"
                   layoutId="activeTab"
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 ></motion.div>
@@ -244,8 +267,8 @@ export default function SignalTypes() {
           >
             <div className="p-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-full bg-[#fcf0c1]/10 glow-effect">{activeSignal.icon}</div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#fcf0c1] neon-text">{activeSignal.name}</h3>
+                <div className="p-2 rounded-full bg-primary/10 glow-effect">{activeSignal.icon}</div>
+                <h3 className="text-2xl md:text-3xl font-bold text-primary neon-text">{activeSignal.name}</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -279,22 +302,42 @@ export default function SignalTypes() {
                     {activeSignal.stats.map((stat, index) => (
                       <motion.div
                         key={index}
-                        className="bg-black/60 p-4 rounded-md border border-[#fcf0c1]/10 hover:border-[#fcf0c1]/30 transition-colors"
+                        className="bg-secondary/60 p-4 rounded-md border border-primary/10 hover:border-primary/30 transition-colors"
                         whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
                       >
                         <div className="flex items-center gap-2 mb-2">
                           {stat.icon}
-                          <h4 className="text-[#fcf0c1] text-xs font-medium">{stat.label}</h4>
+                          <h4 className="text-primary text-xs font-medium">{stat.label}</h4>
                         </div>
-                        <p className="text-[#fcf0c1] font-bold">{stat.value}</p>
+                        <p className="text-primary font-bold">{stat.value}</p>
                       </motion.div>
                     ))}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-black/60 p-4 rounded-md border border-[#fcf0c1]/10">
-                      <h4 className="text-[#fcf0c1] text-sm font-medium mb-1">WIN RATE:</h4>
+                    <div className="relative bg-black/60 p-4 rounded-md border border-[#fcf0c1]/10">
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-[#fcf0c1] text-sm font-medium">WIN RATE:</h4>
+                        <button
+                          className="text-[#fcf0c1]/50 hover:text-[#fcf0c1]"
+                          onMouseEnter={() => setShowTooltip("winRate")}
+                          onMouseLeave={() => setShowTooltip(null)}
+                        >
+                          <Info className="h-3 w-3" />
+                        </button>
+                      </div>
                       <p className="text-[#fcf0c1]">{activeSignal.winRate}</p>
+
+                      {showTooltip === "winRate" && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="absolute top-full left-0 mt-2 px-3 py-1.5 bg-black/90 border border-[#fcf0c1]/20 rounded text-xs text-[#fcf0c1] z-50 w-64"
+                        >
+                          {glossary.winRate}
+                        </motion.div>
+                      )}
                     </div>
 
                     <div className="bg-black/60 p-4 rounded-md border border-[#fcf0c1]/10">
@@ -304,12 +347,25 @@ export default function SignalTypes() {
                   </div>
 
                   <div className="bg-black/60 p-4 rounded-md mb-4 border border-[#fcf0c1]/10">
-                    <p className="text-[#fcf0c1]/90">{activeSignal.description}</p>
+                    <h4 className="text-[#fcf0c1] text-sm font-medium mb-2">DESCRIPTION:</h4>
+                    <p className="text-[#fcf0c1]/90 text-sm leading-relaxed">{activeSignal.description}</p>
                   </div>
 
-                  <div className="bg-[#1a2e1a] border-l-4 border-green-500 p-4 rounded-md">
+                  <div className="bg-[#1a2e1a] border-l-4 border-green-500 p-4 rounded-md mb-4">
+                    <h4 className="text-[#fcf0c1] text-sm font-medium mb-2">KEY BENEFITS:</h4>
+                    <ul className="space-y-2">
+                      {activeSignal.benefits.map((benefit, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm">
+                          <span className="text-green-500 mt-0.5">•</span>
+                          <span className="text-[#fcf0c1]/90">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bg-[#1a1a2e] border-l-4 border-blue-500 p-4 rounded-md">
                     <h4 className="text-[#fcf0c1] text-sm font-medium mb-1">IDEAL FOR:</h4>
-                    <p className="text-[#fcf0c1]/90">{activeSignal.idealFor}</p>
+                    <p className="text-[#fcf0c1]/90 text-sm">{activeSignal.idealFor}</p>
                   </div>
                 </div>
               </div>
@@ -343,6 +399,28 @@ export default function SignalTypes() {
               </motion.div>
             ))}
         </div>
+
+        {/* Call to action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 text-center"
+        >
+          <p className="text-primary-100/80 mb-6 max-w-2xl mx-auto">
+            CHOOSE THE SIGNAL TYPE THAT MATCHES YOUR TRADING STYLE AND RISK TOLERANCE. COMMANDER TIER MEMBERS GET ACCESS
+            TO ALL SIGNAL TYPES.
+          </p>
+          <V31Button
+            variant="primary"
+            as="a"
+            href="https://t.me/fttrenches_main"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            UPGRADE TO COMMANDER TIER
+          </V31Button>
+        </motion.div>
       </motion.div>
     </div>
   )
