@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Rocket, TrendingUp, Twitter, BarChart3, AlertTriangle, Clock, Target, Award, Info } from "lucide-react"
 import { useInView } from "react-intersection-observer"
 import Image from "next/image"
+import { V31Button } from "../ui/v31-button"
 
 type SignalType = {
   id: string
@@ -54,7 +55,7 @@ export default function SignalTypes() {
       description:
         "THESE SIGNALS IDENTIFY VERY EARLY-STAGE TOKENS THAT MULTIPLE SMART MONEY WALLETS ARE BUYING, OFTEN WITHIN HOURS OF LAUNCH. REQUIRES IMMEDIATE EXECUTION AND PRECISE ENTRY STRATEGIES.",
       idealFor: "EXPERIENCED TRADERS COMFORTABLE WITH HIGH VOLATILITY AND RAPID DECISION-MAKING.",
-      image: "/images/new-launch-signal.png",
+      image: "/images/Main.png",
       stats: [
         {
           icon: <AlertTriangle className="h-4 w-4 text-red-500" />,
@@ -92,7 +93,7 @@ export default function SignalTypes() {
       description:
         "THESE SIGNALS IDENTIFY ESTABLISHED TOKENS WITH SIGNIFICANT SMART MONEY INTEREST, OFTEN WITH GROWING POSITIONS OVER $100K. STRATEGIC PLAYS FOLLOWING ESTABLISHED SMART MONEY ACCUMULATION PATTERNS.",
       idealFor: "TRADERS SEEKING MORE STABILITY WHILE STILL CAPTURING SIGNIFICANT UPSIDE.",
-      image: "/images/mid-sized-signal.png",
+      image: "/images/Main.png",
       stats: [
         {
           icon: <AlertTriangle className="h-4 w-4 text-yellow-500" />,
@@ -117,8 +118,8 @@ export default function SignalTypes() {
       ],
     },
     {
-      id: "social-based",
-      name: "SOCIAL-BASED TWITTER BOT",
+      id: "smart-social",
+      name: "SMART SOCIAL",
       icon: <Twitter className="h-5 w-5" />,
       riskProfile: {
         level: "VARIABLE",
@@ -130,7 +131,7 @@ export default function SignalTypes() {
       description:
         "THESE SIGNALS IDENTIFY PROJECTS RECEIVING ATTENTION FROM KEY OPINION LEADERS (KOLS) THAT CORRELATE WITH SMART MONEY INTEREST. TRACKS WHEN KEY OPINION LEADERS FOLLOW PROJECTS.",
       idealFor: "TRADERS WHO UNDERSTAND NARRATIVE-DRIVEN MARKET MOVEMENTS AND SOCIAL INFLUENCE.",
-      image: "/images/social-based-signal.png",
+      image: "/images/Social.png",
       stats: [
         {
           icon: <AlertTriangle className="h-4 w-4 text-purple-500" />,
@@ -168,7 +169,7 @@ export default function SignalTypes() {
       description:
         "THESE SIGNALS IDENTIFY TOKENS EXPERIENCING SUDDEN VOLUME INCREASES COINCIDING WITH SMART MONEY PURCHASES. REQUIRES IMMEDIATE EXECUTION AND CLOSE MONITORING.",
       idealFor: "EXPERIENCED TRADERS COMFORTABLE WITH HIGH VOLATILITY AND RAPID DECISION-MAKING.",
-      image: "/images/volume-spike-signal.png",
+      image: "/images/Volume.png",
       stats: [
         {
           icon: <AlertTriangle className="h-4 w-4 text-red-600" />,
@@ -221,13 +222,13 @@ export default function SignalTypes() {
       >
         <div className="text-center mb-12">
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 relative inline-block neon-text"
+            className="text-3xl md:text-4xl font-bold text-primary mb-4 relative inline-block neon-text"
             data-text="SIGNAL TYPES FOR EVERY STRATEGY"
           >
             SIGNAL TYPES FOR EVERY STRATEGY
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-red-500 mt-2"></div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent mt-2"></div>
           </h2>
-          <p className="text-xl text-[#fcf0c1]/80 mt-6 max-w-3xl mx-auto">
+          <p className="text-xl text-primary/80 mt-6 max-w-3xl mx-auto">
             WE'VE DEVELOPED MULTIPLE SIGNAL TYPES TO MATCH DIFFERENT RISK PROFILES AND TRADING STRATEGIES
           </p>
         </div>
@@ -237,7 +238,7 @@ export default function SignalTypes() {
           {signalTypes.map((signal) => (
             <button
               key={signal.id}
-              className={`px-4 py-2 text-[#fcf0c1] font-medium text-sm md:text-base relative transition-all duration-300 ${
+              className={`px-4 py-2 text-primary font-medium text-sm md:text-base relative transition-all duration-300 ${
                 activeTab === signal.id ? "opacity-100" : "opacity-70 hover:opacity-90"
               }`}
               onClick={() => setActiveTab(signal.id)}
@@ -245,7 +246,7 @@ export default function SignalTypes() {
               {signal.name}
               {activeTab === signal.id && (
                 <motion.div
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"
                   layoutId="activeTab"
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 ></motion.div>
@@ -266,8 +267,8 @@ export default function SignalTypes() {
           >
             <div className="p-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-full bg-[#fcf0c1]/10 glow-effect">{activeSignal.icon}</div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#fcf0c1] neon-text">{activeSignal.name}</h3>
+                <div className="p-2 rounded-full bg-primary/10 glow-effect">{activeSignal.icon}</div>
+                <h3 className="text-2xl md:text-3xl font-bold text-primary neon-text">{activeSignal.name}</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -301,14 +302,14 @@ export default function SignalTypes() {
                     {activeSignal.stats.map((stat, index) => (
                       <motion.div
                         key={index}
-                        className="bg-black/60 p-4 rounded-md border border-[#fcf0c1]/10 hover:border-[#fcf0c1]/30 transition-colors"
+                        className="bg-secondary/60 p-4 rounded-md border border-primary/10 hover:border-primary/30 transition-colors"
                         whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
                       >
                         <div className="flex items-center gap-2 mb-2">
                           {stat.icon}
-                          <h4 className="text-[#fcf0c1] text-xs font-medium">{stat.label}</h4>
+                          <h4 className="text-primary text-xs font-medium">{stat.label}</h4>
                         </div>
-                        <p className="text-[#fcf0c1] font-bold">{stat.value}</p>
+                        <p className="text-primary font-bold">{stat.value}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -406,18 +407,19 @@ export default function SignalTypes() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-[#fcf0c1]/80 mb-6 max-w-2xl mx-auto">
+          <p className="text-primary-100/80 mb-6 max-w-2xl mx-auto">
             CHOOSE THE SIGNAL TYPE THAT MATCHES YOUR TRADING STYLE AND RISK TOLERANCE. COMMANDER TIER MEMBERS GET ACCESS
             TO ALL SIGNAL TYPES.
           </p>
-          <a
+          <V31Button
+            variant="primary"
+            as="a"
             href="https://t.me/fttrenches_main"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-red-600 text-white font-bold rounded-md hover:bg-red-700 transition-colors"
           >
             UPGRADE TO COMMANDER TIER
-          </a>
+          </V31Button>
         </motion.div>
       </motion.div>
     </div>

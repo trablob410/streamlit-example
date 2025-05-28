@@ -3,16 +3,15 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { V31Button } from "../ui/v31-button"
+import Image from "next/image"
 
 interface Testimonial {
   id: number
   text: string
   author: string
-  role: string
-  rating: number
-  tradingExperience: string
-  returns?: string
+  avatar: string
 }
 
 export default function TestimonialsSection() {
@@ -28,39 +27,39 @@ export default function TestimonialsSection() {
   const testimonials: Testimonial[] = [
     {
       id: 1,
-      text: "I've tried multiple signal groups before, but FTT is on another level. The Smart Money tracking actually works. I've seen 3x returns on multiple signals within days. The community is also incredibly supportive and educational.",
-      author: "Crypto_Trader_42",
-      role: "Community Member",
-      rating: 5,
-      tradingExperience: "3 years",
-      returns: "~300% in 2 months",
-    },
-    {
-      id: 2,
-      text: "What sets FTT apart is their transparency. They don't hide their losses and actually explain the reasoning behind each signal. The different signal types help me choose based on my risk tolerance. Mid-sized signals have been particularly profitable for me.",
-      author: "BlockchainBaron",
-      role: "Commander Tier Member",
-      rating: 5,
-      tradingExperience: "5+ years",
-      returns: "~450% since joining",
+      text: "Hey ser, just wanna say ur signals are fucking great, ive tried everything since teso, so i know my stuff, have also my own memetrade stuff, i code (noob tho), anw, just wanna say gj on consistency and algo i guess, u got that sauce ser. Avoided coding anything to check smart wallets (using only free apis to fetch price and trade), but ur bot made me change my mind for sure..",
+      author: "candylaned",
+      avatar: "/images/avatars/candylaned.jpg",
     },
     {
       id: 3,
-      text: "As someone new to crypto trading, FTT has been invaluable. The educational resources helped me understand the market, and the signals gave me confidence to make my first trades. The community answered all my questions without judgment.",
-      author: "CryptoNewbie",
-      role: "Recon Tier Member",
-      rating: 4,
-      tradingExperience: "6 months",
-      returns: "~120% in first month",
+      text: "That sounds sickk looking forward to it",
+      author: "Demon",
+      avatar: "/images/avatars/demon.jpg",
     },
     {
       id: 4,
-      text: "The Volume Spike + SM signals are incredibly fast and accurate. I've caught several 2-3x pumps within hours. The Telegram notifications are reliable, and the team is always available to answer questions. Worth every SOL of the subscription.",
-      author: "MoonHunter",
-      role: "Commander Tier Member",
-      rating: 5,
-      tradingExperience: "2 years",
-      returns: "~280% in 3 months",
+      text: "yeah mean i trench a lot and use a few diff tools but ive been keeping my eye on yours",
+      author: "Dags",
+      avatar: "/images/avatars/dags.jpg",
+    },
+    {
+      id: 5,
+      text: "Lmao btw plz dnt release the twitter follow one publicly it's too good",
+      author: "Popseye",
+      avatar: "/images/avatars/popseye.jpg",
+    },
+    {
+      id: 6,
+      text: "The signals have been incredibly accurate and the community support is amazing. Really appreciate the transparency and educational content.",
+      author: "HinTrenches",
+      avatar: "/images/avatars/hintrenches.jpg",
+    },
+    {
+      id: 7,
+      text: "Been following FTT for months now and the consistency is unmatched. The smart money tracking really gives you an edge in this market.",
+      author: "Josh",
+      avatar: "/images/avatars/josh.jpg",
     },
   ]
 
@@ -114,16 +113,16 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#fcf0c1] mb-4 neon-text">TRADER TESTIMONIALS</h2>
-          <p className="text-xl text-[#fcf0c1]/80 max-w-3xl mx-auto">
-            HEAR FROM THE COMMUNITY ABOUT THEIR EXPERIENCE WITH FROM THE TRENCHES
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 neon-text">COMMUNITY FEEDBACK</h2>
+          <p className="text-xl text-primary/80 max-w-3xl mx-auto">
+            REAL COMMENTS FROM OUR COMMUNITY MEMBERS ABOUT THEIR EXPERIENCE WITH FROM THE TRENCHES
           </p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto relative">
           {/* Testimonial carousel */}
           <div
-            className="relative overflow-hidden min-h-[400px] md:min-h-[350px]"
+            className="relative overflow-hidden min-h-[300px] md:min-h-[250px]"
             onMouseEnter={() => setAutoplay(false)}
             onMouseLeave={() => setAutoplay(true)}
           >
@@ -139,36 +138,29 @@ export default function TestimonialsSection() {
             >
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-shrink-0 w-full md:w-auto flex justify-center">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                    <Quote className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                  <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-accent/50">
+                    <Image
+                      src={testimonials[activeIndex].avatar || "/placeholder.svg"}
+                      alt={testimonials[activeIndex].author}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                   </div>
                 </div>
 
                 <div className="flex-grow">
                   <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < testimonials[activeIndex].rating ? "text-yellow-400 fill-yellow-400" : "text-gray-400"
-                        }`}
-                      />
-                    ))}
+                    <Quote className="w-6 h-6 text-accent mr-2" />
                   </div>
 
-                  <blockquote className="text-[#fcf0c1]/90 text-lg mb-6 italic">
+                  <blockquote className="text-primary/90 text-lg mb-6 italic">
                     "{testimonials[activeIndex].text}"
                   </blockquote>
 
-                  <div className="border-t border-[#fcf0c1]/10 pt-4 mt-4">
-                    <div className="font-bold text-[#fcf0c1]">{testimonials[activeIndex].author}</div>
-                    <div className="text-[#fcf0c1]/70 text-sm">{testimonials[activeIndex].role}</div>
-                    <div className="flex flex-wrap gap-4 mt-2 text-xs text-[#fcf0c1]/60">
-                      <span>TRADING EXPERIENCE: {testimonials[activeIndex].tradingExperience}</span>
-                      {testimonials[activeIndex].returns && (
-                        <span>REPORTED RETURNS: {testimonials[activeIndex].returns}</span>
-                      )}
-                    </div>
+                  <div className="border-t border-primary/10 pt-4 mt-4">
+                    <div className="font-bold text-primary text-lg">{testimonials[activeIndex].author}</div>
+                    <div className="text-primary/70 text-sm">COMMUNITY MEMBER</div>
                   </div>
                 </div>
               </div>
@@ -179,7 +171,7 @@ export default function TestimonialsSection() {
           <div className="flex justify-center mt-8 gap-4">
             <button
               onClick={prevTestimonial}
-              className="p-2 rounded-full bg-black/40 border border-[#fcf0c1]/30 text-[#fcf0c1] hover:bg-[#fcf0c1]/10 transition-colors"
+              className="p-2 rounded-full bg-secondary/40 border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -193,7 +185,7 @@ export default function TestimonialsSection() {
                     setActiveIndex(index)
                   }}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    index === activeIndex ? "bg-red-500 w-4" : "bg-[#fcf0c1]/30 hover:bg-[#fcf0c1]/50"
+                    index === activeIndex ? "bg-accent w-4" : "bg-primary/30 hover:bg-primary/50"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                   aria-current={index === activeIndex ? "true" : "false"}
@@ -202,7 +194,7 @@ export default function TestimonialsSection() {
             </div>
             <button
               onClick={nextTestimonial}
-              className="p-2 rounded-full bg-black/40 border border-[#fcf0c1]/30 text-[#fcf0c1] hover:bg-[#fcf0c1]/10 transition-colors"
+              className="p-2 rounded-full bg-secondary/40 border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -215,17 +207,18 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12 text-center"
           >
-            <p className="text-[#fcf0c1]/80 mb-6">
-              JOIN OUR COMMUNITY TO SEE MORE SUCCESS STORIES AND START YOUR OWN TRADING JOURNEY
+            <p className="text-primary-100/80 mb-6">
+              JOIN OUR COMMUNITY TO SHARE YOUR OWN SUCCESS STORIES AND CONNECT WITH OTHER TRADERS
             </p>
-            <a
+            <V31Button
+              variant="secondary"
+              as="a"
               href="https://t.me/fttrenches_main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-transparent border border-[#fcf0c1] text-[#fcf0c1] font-bold rounded-md hover:bg-[#fcf0c1]/10 transition-colors"
             >
               JOIN OUR COMMUNITY
-            </a>
+            </V31Button>
           </motion.div>
         </div>
       </div>
