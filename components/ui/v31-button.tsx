@@ -3,7 +3,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-950 disabled:pointer-events-none disabled:opacity-50",
@@ -73,14 +72,10 @@ const V31Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     if (animated) {
-      return (
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }}>
-          <Comp ref={ref as any} {...allProps} />
-        </motion.div>
-      )
+      return <Comp ref={ref as any} {...allProps} href="https://app.hel.io/x/fttrenches-1mo" />
     }
 
-    return <Comp ref={ref as any} {...allProps} />
+    return <Comp ref={ref as any} {...allProps} href="https://app.hel.io/x/fttrenches-1mo" />
   },
 )
 V31Button.displayName = "V31Button"

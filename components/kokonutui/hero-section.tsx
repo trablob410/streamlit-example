@@ -168,9 +168,9 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left column - Main content */}
-          <div className="space-y-8">
+        <div className="flex items-center justify-center min-h-[80vh]">
+          {/* Main content - centered */}
+          <div className="space-y-8 text-center max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -207,7 +207,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <V31Button
                 variant="primary"
@@ -235,7 +235,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="max-w-md"
+              className="max-w-md mx-auto"
             >
               <h3 className="text-primary font-bold mb-4 text-lg">SEARCH COMMANDS</h3>
               <div className="relative">
@@ -377,8 +377,6 @@ export default function HeroSection() {
               </div>
             </motion.div>
           </div>
-
-          {/* Right column - Visual element */}
         </div>
       </div>
     </section>
